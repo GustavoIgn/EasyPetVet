@@ -13,4 +13,4 @@
     <item
 	android:id="@+id/item_voltar"
 	android:title="@string/voltar" />
-</menu><?xml version="1.0" encoding="utf-8"?>
+</menu>
