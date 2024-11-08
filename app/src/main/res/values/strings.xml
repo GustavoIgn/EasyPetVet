@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Controle Veterinário</string>
+    <string name="cadastrar_animal">Cadastrar Animal</string>
+    <string name="nome">Nome</string>
+    <string name="especie">Espécie</string>
+    <string name="raca">Raça</string>
+    <string name="idade">Idade</string>
+    <string name="salvar">Salvar</string>
+    <string name="campos_obrigatorios">Preencha todos os campos obrigatórios!</string>
+    <string name="animal_cadastrado">Animal cadastrado com sucesso!</string>
+    <string name="animais">Animais</string>
+    <string name="consultas">Consultas</string>
+    <string name="vacinas">Vacinas<string>
+</resources>
