@@ -36,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             carregaFragment(bundle);
+        } else {
+            FragmentManager FragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = FragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, new FragmentInicial());
+            fragmentTransaction.commit();
         }
     }
 
@@ -47,8 +52,10 @@ public class MainActivity extends AppCompatActivity {
             } else if (tipoItem.equals("Vacinas")) {
                 fragment = new FragmentVacinas();
             } else if (tipoItem.equals("Consultas")) {
-		fragment = new FragmentConsultas();
- 	    } 
+                fragment = new FragmentConsultas();
+            } else if (tipoItem.equals("Voltar")) {
+                fragment = new FragmentInicial();
+            }
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -88,6 +95,14 @@ public class MainActivity extends AppCompatActivity {
         }
         if (id == R.id.menu_consultas) {
             bundle.putString("tipoItem", "Consultas");
+
+            intent.putExtras(bundle);
+            this.startActivity(intent);
+            this.finish();
+            return true;
+        }
+        if (id == R.id.menu_voltar) {
+            bundle.putString("tipoItem", "Voltar");
 
             intent.putExtras(bundle);
             this.startActivity(intent);

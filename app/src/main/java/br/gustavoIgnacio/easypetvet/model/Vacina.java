@@ -6,7 +6,7 @@ package br.gustavoIgnacio.easypetvet.model;
 
 import java.util.Date;
 
-public class Vacina implements Notificavel {
+public class Vacina implements INotificavel {
     private int id;
     private Animal animal;
     private String nome;

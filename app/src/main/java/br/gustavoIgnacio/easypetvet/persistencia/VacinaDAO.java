@@ -12,12 +12,17 @@ import android.database.sqlite.SQLiteDatabase;
 import br.gustavoIgnacio.easypetvet.model.Vacina;
 import br.gustavoIgnacio.easypetvet.model.Animal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class VacinaDAO {
+    public VacinaDAO() {
+
+    }
 
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
+    private Context context;
 
     public VacinaDAO(Context context) {
         dbHelper = new DatabaseHelper(context);
@@ -45,7 +50,7 @@ public class VacinaDAO {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 int animalId = cursor.getInt(cursor.getColumnIndex("animal_id"));
-                AnimalDAO animalDAO = new AnimalDAO(dbHelper.getContext());
+                AnimalDAO animalDAO = new AnimalDAO(context);
                 Animal animal = animalDAO.obterAnimalPorId(animalId);
 
                 String nome = cursor.getString(cursor.getColumnIndex("nome"));
@@ -70,7 +75,7 @@ public class VacinaDAO {
 
         if (cursor != null && cursor.moveToFirst()) {
             int animalId = cursor.getInt(cursor.getColumnIndex("animal_id"));
-            AnimalDAO animalDAO = new AnimalDAO(dbHelper.getContext());
+            AnimalDAO animalDAO = new AnimalDAO(context);
             Animal animal = animalDAO.obterAnimalPorId(animalId);
 
             String nome = cursor.getString(cursor.getColumnIndex("nome"));

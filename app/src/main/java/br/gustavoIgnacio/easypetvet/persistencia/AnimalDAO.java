@@ -18,6 +18,9 @@ public class AnimalDAO {
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
 
+    public AnimalDAO() {
+    }
+
     public AnimalDAO(Context context) {
         dbHelper = new DatabaseHelper(context);
     }
@@ -47,7 +50,8 @@ public class AnimalDAO {
                         cursor.getString(cursor.getColumnIndex("nome")),
                         cursor.getString(cursor.getColumnIndex("especie")),
                         cursor.getString(cursor.getColumnIndex("raca")),
-                        cursor.getInt(cursor.getColumnIndex("idade"))
+                        cursor.getInt(cursor.getColumnIndex("idade")),
+                        cursor.getString(cursor.getColumnIndex("cpfDono"))
                 );
                 animais.add(animal);
                 cursor.moveToNext();
@@ -68,7 +72,8 @@ public class AnimalDAO {
                     cursor.getString(cursor.getColumnIndex("nome")),
                     cursor.getString(cursor.getColumnIndex("especie")),
                     cursor.getString(cursor.getColumnIndex("raca")),
-                    cursor.getInt(cursor.getColumnIndex("idade"))
+                    cursor.getInt(cursor.getColumnIndex("idade")),
+                    cursor.getString(cursor.getColumnIndex("cpfDono"))
             );
             cursor.close();
             return animal;

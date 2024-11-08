@@ -12,7 +12,9 @@ public class Animal {
     private int idade;
 	private String cpfDono;
 	
-	public Animal() {}
+	public Animal() {
+
+    }
 
     public Animal(int id, String nome, String especie, String raca, int idade, String cpfDono) {
         this.id = id;
@@ -68,7 +70,7 @@ public class Animal {
 	}
 	
 	public void setCPFDono(String cpfDono) {
-		this.cpfDono = cpfDono
+		this.cpfDono = cpfDono;;
 	}
 	
     @Override

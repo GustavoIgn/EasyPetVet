@@ -6,7 +6,7 @@ package br.gustavoIgnacio.easypetvet.model;
 
 import java.util.Date;
 
-public abstract class Consulta implements Notificavel {
+public abstract class Consulta implements INotificavel {
     private int id;
     private Animal animal;
     private Date data;

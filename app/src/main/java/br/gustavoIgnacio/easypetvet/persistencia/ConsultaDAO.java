@@ -14,14 +14,19 @@ import br.gustavoIgnacio.easypetvet.model.ConsultaEmergencia;
 import br.gustavoIgnacio.easypetvet.model.ConsultaRotina;
 import br.gustavoIgnacio.easypetvet.model.Animal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ConsultaDAO {
 
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
+    private Context context;
+
+    public ConsultaDAO() {}
 
     public ConsultaDAO(Context context) {
+        this.context = context;
         dbHelper = new DatabaseHelper(context);
     }
 
@@ -47,7 +52,7 @@ public class ConsultaDAO {
             while (!cursor.isAfterLast()) {
                 // Obter os dados do animal associado à consulta
                 int animalId = cursor.getInt(cursor.getColumnIndex("animal_id"));
-                AnimalDAO animalDAO = new AnimalDAO(dbHelper.getContext());
+                AnimalDAO animalDAO = new AnimalDAO(context);
                 Animal animal = animalDAO.obterAnimalPorId(animalId);
 
                 String descricao = cursor.getString(cursor.getColumnIndex("descricao"));
@@ -78,7 +83,7 @@ public class ConsultaDAO {
 
         if (cursor != null && cursor.moveToFirst()) {
             int animalId = cursor.getInt(cursor.getColumnIndex("animal_id"));
-            AnimalDAO animalDAO = new AnimalDAO(dbHelper.getContext());
+            AnimalDAO animalDAO = new AnimalDAO(context);
             Animal animal = animalDAO.obterAnimalPorId(animalId);
 
             String descricao = cursor.getString(cursor.getColumnIndex("descricao"));

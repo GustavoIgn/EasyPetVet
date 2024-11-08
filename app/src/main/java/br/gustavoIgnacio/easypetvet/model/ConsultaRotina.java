@@ -4,6 +4,8 @@ package br.gustavoIgnacio.easypetvet.model;
 @author:<Gustavo da Silva Ignacio 1110482313006>
 */
 
+import java.util.Date;
+
 public class ConsultaRotina extends Consulta {
 
     public ConsultaRotina(int id, Animal animal, Date data, String descricao) {
