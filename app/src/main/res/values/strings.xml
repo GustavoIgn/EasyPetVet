@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Controle Veterinário</string>
+    <string name="app_name">EasyPetVet</string>
     <string name="cadastrar_animal">Cadastrar Animal</string>
     <string name="nome">Nome</string>
     <string name="especie">Espécie</string>
@@ -11,4 +11,8 @@
     <string name="animais">Animais</string>
     <string name="consultas">Consultas</string>
     <string name="vacinas">Vacinas<string>
+    <string name="adicionar_animal">Adicionar Animal</string>
+    <string name="adicionar_consulta">Adicionar Consulta</string>
+    <string name="adicionar_vacina">Adicionar Vacina</string>
+    <string name="voltar">Voltar</string>
 </resources>
