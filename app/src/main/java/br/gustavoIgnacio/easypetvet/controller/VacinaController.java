@@ -15,19 +15,4 @@ public class VacinaController {
     public VacinaController() {
         vacinaDAO = new VacinaDAO();
     }
-
-    // Criar nova vacina
-    public void criarVacina(Vacina vacina) {
-        vacinaDAO.inserirVacina(vacina);
-    }
-
-    // Obter lista de todas as vacinas
-    public List<Vacina> listarVacinas() {
-        return vacinaDAO.obterTodasVacinas();
-    }
-
-    // Notificar sobre vacina
-    public void notificarVacina(Vacina vacina) {
-        vacina.notificar("A vacina de " + vacina.getAnimal().getNome() + " está agendada para " + vacina.getDataAplicacao());
-    }
 }

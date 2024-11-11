@@ -13,88 +13,94 @@ import br.gustavoIgnacio.easypetvet.model.Animal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnimalDAO {
+public class AnimalDAO implements ICRUDDao<Animal>{
 
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
-
-    public AnimalDAO() {
-    }
+	private final Context context;
 
     public AnimalDAO(Context context) {
-        dbHelper = new DatabaseHelper(context);
+		this.context = context;
     }
-
-    // Inserir animal
-    public void inserirAnimal(Animal animal) {
-        db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("nome", animal.getNome());
-        values.put("especie", animal.getEspecie());
-        values.put("raca", animal.getRaca());
-        values.put("idade", animal.getIdade());
-        db.insert(DatabaseHelper.TABELA_ANIMAL, null, values);
+	
+	public AnimalDAO open() throws SQLException {
+		dbHelper = new DatabaseHelper(context);
+		db = dbHelper.getWritableDatabase();
+		return this;
+	}
+	
+	public void close() {
+		dbHelper.close();
+	}
+	
+	@Override
+	public void insert(Animal animal) throws SQLException {
+		ContentValues contentValues = getContentValues(animal);
+		db.insert(DatabaseHelper.TABELA_ANIMAL, null, contentValues);
     }
+	
+	
+	@Override
+	public int update(Animal animal) throws SQLException {
+		ContentValues contentValues = getContentValues(animal);
+		int ret = db.update(DatabaseHelper.TABELA_ANIMAL, contentValues, "cpf_dono = ?", new String[]{animal.getCPFDono()});
+		return ret;
+	}
+	
+	@Override
+	public void delete(Animal animal) throws SQLException {
+		ContentValues contentValues = getContentValues(animal);
+		db.delete(DatabaseHelper.TABELA_ANIMAL, "cpf_dono = ?", new String[]{animal.getCPFDono()});
+	}
+	
+	@Override
+	public Animal findByCPF(Animal animal) throws SQLException {
+		Animal resultadoAnimal = null;
+		Cursor cursor = db.query(DatabaseHelper.TABELA_ANIMAL, null, "cpf_dono = ?", new String[]{animal.getCPFDono()}, null, null, null);
 
-    // Obter todos os animais
-    public List<Animal> obterTodosAnimais() {
+		if (cursor != null && cursor.moveToFirst()) {
+			resultadoAnimal = cursorToAnimal(cursor);
+			cursor.close();
+		}
+
+		return resultadoAnimal;
+	}
+	
+    @Override
+    public List<Animal> findALL() throws SQLException {
         List<Animal> animais = new ArrayList<>();
-        db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(DatabaseHelper.TABELA_ANIMAL, null, null, null, null, null, null);
 
         if (cursor != null) {
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                Animal animal = new Animal(
-                        cursor.getInt(cursor.getColumnIndex("id")),
-                        cursor.getString(cursor.getColumnIndex("nome")),
-                        cursor.getString(cursor.getColumnIndex("especie")),
-                        cursor.getString(cursor.getColumnIndex("raca")),
-                        cursor.getInt(cursor.getColumnIndex("idade")),
-                        cursor.getString(cursor.getColumnIndex("cpfDono"))
-                );
+            while (cursor.moveToNext()) {
+                Animal animal = cursorToAnimal(cursor);
                 animais.add(animal);
-                cursor.moveToNext();
             }
             cursor.close();
         }
+
         return animais;
     }
 
-    // Obter animal por ID
-    public Animal obterAnimalPorId(int id) {
-        db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(DatabaseHelper.TABELA_ANIMAL, null, "id=?", new String[]{String.valueOf(id)}, null, null, null);
-
-        if (cursor != null && cursor.moveToFirst()) {
-            Animal animal = new Animal(
-                    cursor.getInt(cursor.getColumnIndex("id")),
-                    cursor.getString(cursor.getColumnIndex("nome")),
-                    cursor.getString(cursor.getColumnIndex("especie")),
-                    cursor.getString(cursor.getColumnIndex("raca")),
-                    cursor.getInt(cursor.getColumnIndex("idade")),
-                    cursor.getString(cursor.getColumnIndex("cpfDono"))
-            );
-            cursor.close();
-            return animal;
-        }
-        return null;
+    private Animal cursorToAnimal(Cursor cursor) {
+        Animal animal = new Animal();
+        animal.setId(cursor.getInt(cursor.getColumnIndex("id")));
+        animal.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+        animal.setEspecie(cursor.getString(cursor.getColumnIndex("especie")));
+        animal.setRaca(cursor.getString(cursor.getColumnIndex("raca")));
+        animal.setIdade(cursor.getInt(cursor.getColumnIndex("idade")));
+        animal.setCPFDono(cursor.getString(cursor.getColumnIndex("cpf_dono")));
+        return animal;
     }
 
-    // Atualizar animal
-    public void atualizarAnimal(Animal animal) {
-        db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("nome", animal.getNome());
-        values.put("especie", animal.getEspecie());
-        values.put("raca", animal.getRaca());
-        values.put("idade", animal.getIdade());
-        db.update(DatabaseHelper.TABELA_ANIMAL, values, "id=?", new String[]{String.valueOf(animal.getId())});
-    }
+    public ContentValues getContentValues(Animal animal) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("nome", animal.getNome());
+        contentValues.put("especie", animal.getEspecie());
+        contentValues.put("raca", animal.getRaca());
+        contentValues.put("idade", animal.getIdade());
+        contentValues.put("cpf_dono", animal.getCPFDono());
 
-    // Deletar animal
-    public void deletarAnimal(int id) {
-        db = dbHelper.getWritableDatabase();
-        db.delete(DatabaseHelper.TABELA_ANIMAL, "id=?", new String[]{String.valueOf(id)});
+        return contentValues;
     }
 }

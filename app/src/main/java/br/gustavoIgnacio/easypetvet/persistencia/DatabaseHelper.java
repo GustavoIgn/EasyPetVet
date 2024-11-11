@@ -13,7 +13,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "controle_veterinario.db";
     private static final int DATABASE_VERSION = 1;
 
-    public static final String TABELA_ANIMAL = "animal";
+    public static final String TABELA_ANIMAL = "animais";
     public static final String TABELA_CONSULTA = "consulta";
     public static final String TABELA_VACINA = "vacina";
 
@@ -25,17 +25,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // Criar tabela Animal
         String createAnimalTable = "CREATE TABLE " + TABELA_ANIMAL + " (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "nome TEXT, " +
-                "especie TEXT, " +
-                "raca TEXT, " +
-                "idade INTEGER, " +
-				"cpfDono TEXT)";
+                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "nome TEXT NOT NULL, " +
+                "especie TEXT NOT NULL, " +
+                "raca TEXT NOT NULL, " +
+                "idade INTEGER NOT NULL, " +
+				"cpf_dono TEXT NOT NULL)";
         db.execSQL(createAnimalTable);
 
         // Criar tabela Consulta
         String createConsultaTable = "CREATE TABLE " + TABELA_CONSULTA + " (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "animal_id INTEGER, " +
                 "data TEXT, " +
                 "descricao TEXT, " +

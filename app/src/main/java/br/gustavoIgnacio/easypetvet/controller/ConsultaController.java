@@ -18,18 +18,4 @@ public class ConsultaController {
         consultaDAO = new ConsultaDAO();
     }
 
-    // Criar nova consulta
-    public void criarConsulta(Consulta consulta) {
-        consultaDAO.inserirConsulta(consulta);
-    }
-
-    // Obter lista de todas as consultas
-    public List<Consulta> listarConsultas() {
-        return consultaDAO.obterTodasConsultas();
-    }
-
-    // Notificar sobre consulta
-    public void notificarConsulta(Consulta consulta) {
-        consulta.notificar("Lembre-se, a consulta de " + consulta.getAnimal().getNome() + " está agendada para " + consulta.getData());
-    }
 }
