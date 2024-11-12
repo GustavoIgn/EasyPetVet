@@ -56,7 +56,7 @@ public class AnimalDAO implements ICRUDDao<Animal>{
 	@Override
 	public Animal findByCPF(Animal animal) throws SQLException {
 		Animal resultadoAnimal = null;
-		Cursor cursor = db.query(DatabaseHelper.TABELA_ANIMAL, null, "cpf_dono = ?", new String[]{animal.getCPFDono()}, null, null, null);
+		Cursor cursor = db.query(DatabaseHelper.TABELA_ANIMAL, null, "cpf_dono =", new String[]{animal.getCPFDono()}, null, null, null);
 
 		if (cursor != null && cursor.moveToFirst()) {
 			resultadoAnimal = cursorToAnimal(cursor);

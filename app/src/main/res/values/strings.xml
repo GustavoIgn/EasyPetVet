@@ -10,6 +10,7 @@
 	<string name="editar">Editar</string>
 	<string name="apagar">Apagar</string>
 	<string name="listar">Listar</string>
+    <string name="buscar">Buscar</string>
     <string name="campos_obrigatorios">Preencha todos os campos obrigatórios!</string>
     <string name="animal_cadastrado">Animal cadastrado com sucesso!</string>
     <string name="animais">Animais</string>

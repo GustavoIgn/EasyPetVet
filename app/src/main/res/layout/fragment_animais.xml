@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,165 +12,171 @@
         android:id="@+id/tvTituloAnimal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tela_animal"
-        android:textSize="24sp"
-        android:textColor="#ffffff"
+        android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-medium"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/tela_animal"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Campo Nome -->
     <EditText
         android:id="@+id/editTextNome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#a0f0a4"
         android:hint="@string/nome"
         android:padding="12dp"
-        android:backgroundTint="#a0f0a4"
-        android:textColorHint="#ffffff"
-        app:layout_constraintTop_toBottomOf="@id/tvTituloAnimal"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColorHint="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloAnimal" />
 
     <!-- Campo Espécie -->
     <EditText
         android:id="@+id/editTextEspecie"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#a0f0a4"
         android:hint="@string/especie"
         android:padding="12dp"
-        android:backgroundTint="#a0f0a4"
         android:textColorHint="#ffffff"
-        app:layout_constraintTop_toBottomOf="@id/editTextNome"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="12dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNome" />
 
     <!-- Campo Raça -->
     <EditText
         android:id="@+id/editTextRaca"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#a0f0a4"
         android:hint="@string/raca"
         android:padding="12dp"
-        android:backgroundTint="#a0f0a4"
         android:textColorHint="#ffffff"
-        app:layout_constraintTop_toBottomOf="@id/editTextEspecie"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="12dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEspecie" />
 
     <!-- Campo Idade -->
     <EditText
         android:id="@+id/editTextIdade"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/idade"
-        android:padding="12dp"
-        android:inputType="number"
-        android:backgroundTint="#a0f0a4"
-        android:textColorHint="#ffffff"
-        app:layout_constraintTop_toBottomOf="@id/editTextRaca"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="12dp" />
+        android:backgroundTint="#a0f0a4"
+        android:hint="@string/idade"
+        android:inputType="number"
+        android:padding="12dp"
+        android:textColorHint="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRaca" />
 
     <!-- Campo CPF Dono -->
     <EditText
         android:id="@+id/editTextCpfDono"
-        android:layout_width="0dp"
+        android:layout_width="379dp"
         android:layout_height="wrap_content"
-        android:hint="@string/cpf_dono"
-        android:padding="12dp"
-        android:inputType="text"
+        android:layout_marginTop="13dp"
         android:backgroundTint="#a0f0a4"
+        android:hint="@string/cpf_dono"
+        android:inputType="text"
+        android:padding="12dp"
         android:textColorHint="#ffffff"
-        app:layout_constraintTop_toBottomOf="@id/editTextIdade"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="12dp" />
-	
-	<!-- Botoes CRUD -->
+        app:layout_constraintEnd_toEndOf="@+id/buttonListar"
+        app:layout_constraintStart_toEndOf="@+id/buttonListar"
+        app:layout_constraintTop_toBottomOf="@+id/editTextIdade" />
+
+    <!-- Botoes CRUD -->
     <Button
         android:id="@+id/buttonSalvar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/salvar"
-        android:textColor="#ffffff"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="#4ebf5d"
         android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/editTextCpfDono"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/buttonListar"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp" />
+        android:text="@string/salvar"
+        android:textColor="#4E342E"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonListar"
+        app:layout_constraintEnd_toStartOf="@+id/buttonListar"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonListar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/listar"
-        android:textColor="#ffffff"
+        android:layout_marginEnd="8dp"
         android:backgroundTint="#4ebf5d"
         android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/editTextCpfDono"
-        app:layout_constraintStart_toEndOf="@id/buttonSalvar"
-        app:layout_constraintEnd_toStartOf="@id/buttonApagar"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="8dp" />
+        android:text="@string/listar"
+        android:textColor="#4E342E"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonApagar"
+        app:layout_constraintEnd_toStartOf="@+id/buttonApagar"
+        app:layout_constraintStart_toEndOf="@+id/buttonSalvar" />
 
     <Button
         android:id="@+id/buttonApagar"
-		android:enabled="false"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/apagar"
-        android:textColor="#ffffff"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:backgroundTint="#f44336"
         android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/editTextCpfDono"
-        app:layout_constraintStart_toEndOf="@id/buttonListar"
-        app:layout_constraintEnd_toStartOf="@id/buttonEditar"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="8dp" />
+        android:text="@string/apagar"
+        android:textColor="#ffffff"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEditar"
+        app:layout_constraintStart_toEndOf="@+id/buttonListar"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCpfDono" />
 
     <Button
         android:id="@+id/buttonEditar"
-		android:enabled="false"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/editar"
-        android:textColor="#ffffff"
         android:backgroundTint="#ff9800"
         android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/editTextCpfDono"
-        app:layout_constraintStart_toEndOf="@id/buttonApagar"
+        android:text="@string/editar"
+        android:textColor="#424242"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonApagar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonApagar" />
+
+    <Button
+        android:id="@+id/buttonBuscar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="8dp" />
-		
-	<TextView
-	    android:id="@+id/tvListaAnimais"
+        android:backgroundTint="#ff9800"
+        android:padding="12dp"
+        android:text="@string/buscar"
+        android:textColor="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSalvar" />
+
+    <TextView
+        android:id="@+id/tvListaAnimais"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:scrollbars="vertical"
         android:text=""
-		android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@id/buttonEditar"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBuscar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
