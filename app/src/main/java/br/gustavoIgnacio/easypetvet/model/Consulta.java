@@ -2,7 +2,7 @@ package br.gustavoIgnacio.easypetvet.model;
 
 /*
 @author:<Gustavo da Silva Ignacio 1110482313006>
-*/
+ */
 
 import java.util.Date;
 
@@ -51,11 +51,11 @@ public abstract class Consulta implements INotificavel {
         this.descricao = descricao;
     }
 
-    @Override
+     @ Override
     public String toString() {
         return "Consulta{id=" + id + ", animal=" + animal.getNome() + ", data=" + data + ", descricao='" + descricao + "'}";
     }
 
-    @Override
+     @ Override
     public abstract void notificar(String mensagem);
 }

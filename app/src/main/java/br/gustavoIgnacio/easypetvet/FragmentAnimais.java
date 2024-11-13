@@ -2,7 +2,7 @@ package br.gustavoIgnacio.easypetvet;
 
 /*
 @author: <Gustavo da Silva Ignacio 1110482313006>
-*/
+ */
 
 import android.os.Bundle;
 
@@ -39,7 +39,12 @@ public class FragmentAnimais extends Fragment {
     private EditText editTextEspecie;
     private EditText editTextRaca;
     private EditText editTextIdade;
-    private Button buttonSalvar, buttonApagar, buttonEditar, buttonListar, buttonBuscar;
+    private EditText editTextId;
+    private Button buttonSalvar,
+    buttonApagar,
+    buttonEditar,
+    buttonListar,
+    buttonBuscar;
     private TextView tvResultado;
     private View view;
     private AnimalController animalController;
@@ -48,7 +53,7 @@ public class FragmentAnimais extends Fragment {
         super();
     }
 
-    @Override
+     @ Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_animais, container, false);
@@ -60,6 +65,7 @@ public class FragmentAnimais extends Fragment {
         editTextEspecie = view.findViewById(R.id.editTextEspecie);
         editTextRaca = view.findViewById(R.id.editTextRaca);
         editTextIdade = view.findViewById(R.id.editTextIdade);
+        editTextId = view.findViewById(R.id.editTextId);
         buttonSalvar = view.findViewById(R.id.buttonSalvar);
         buttonListar = view.findViewById(R.id.buttonListar);
         buttonApagar = view.findViewById(R.id.buttonApagar);
@@ -69,17 +75,19 @@ public class FragmentAnimais extends Fragment {
         tvResultado.setMovementMethod(new ScrollingMovementMethod());
 
         // Configuração dos botões
-        buttonSalvar.setOnClickListener(v -> salvarAnimal());
-        buttonListar.setOnClickListener(v -> listarAnimais());
-        buttonApagar.setOnClickListener(v -> apagarAnimal());
-        buttonEditar.setOnClickListener(v -> editarAnimal());
-        buttonBuscar.setOnClickListener(v -> buscarAnimais());
+        buttonSalvar.setOnClickListener(v->salvarAnimal());
+        buttonListar.setOnClickListener(v->listarAnimais());
+        buttonApagar.setOnClickListener(v->apagarAnimal());
+        buttonEditar.setOnClickListener(v->editarAnimal());
+        buttonBuscar.setOnClickListener(v->buscarAnimais());
 
         return view;
     }
 
     // Método para salvar um animal
     private void salvarAnimal() {
+        if (!camposValidos())
+            return;
         Animal animal = montaAnimal();
 
         try {
@@ -92,13 +100,18 @@ public class FragmentAnimais extends Fragment {
         limparCampos();
     }
 
-    // Método para buscar por CPF
+    // Método para buscar por Id
     private void buscarAnimais() {
-        Animal animal = montaAnimal();
+        String id = editTextId.getText().toString().trim();
+
+        if (id.isEmpty()) {
+            Toast.makeText(view.getContext(), "Digite o ID conforme Tabela", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         try {
-            Animal animal1 = animalController.findByCPF(animal);
-            if (animal.getNome() != null && animal1.getNome() != null) {
+            Animal animal = animalController.findById(id);
+            if (animal != null) {
                 preencheCampos(animal);
             } else {
                 Toast.makeText(view.getContext(), "Animal não Encontrado", Toast.LENGTH_LONG).show();
@@ -107,17 +120,16 @@ public class FragmentAnimais extends Fragment {
         } catch (SQLException e) {
             Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
-
-        limparCampos();
     }
 
     // Método para Listar animais
     private void listarAnimais() {
         try {
-            List<Animal> animais = animalController.findALL();
+            List < Animal > animais = animalController.findALL();
             StringBuffer buffer = new StringBuffer();
-            for (Animal a : animais) {
+            for (Animal a: animais) {
                 buffer.append(a.toString() + "\n");
+                buffer.append("____________________________________\n");
             }
 
             tvResultado.setText(buffer.toString());
@@ -128,10 +140,13 @@ public class FragmentAnimais extends Fragment {
 
     // Método para apagar um animal
     private void apagarAnimal() {
+        if (!camposValidos())
+            return;
         Animal animal = montaAnimal();
         try {
             animalController.delete(animal);
             Toast.makeText(view.getContext(), "Animal Apagado com Sucesso", Toast.LENGTH_LONG).show();
+            listarAnimais();
         } catch (SQLException e) {
             Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -141,11 +156,14 @@ public class FragmentAnimais extends Fragment {
 
     // Método para editar um animal
     private void editarAnimal() {
+        if (!camposValidos())
+            return;
         Animal animal = montaAnimal();
 
         try {
             animalController.update(animal);
             Toast.makeText(view.getContext(), "Animal Atualizado com Sucesso", Toast.LENGTH_LONG).show();
+            listarAnimais();
         } catch (SQLException e) {
             Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -154,6 +172,7 @@ public class FragmentAnimais extends Fragment {
     }
 
     private Animal montaAnimal() {
+        String id = editTextId.getText().toString().trim();
         String nome = editTextNome.getText().toString().trim();
         String especie = editTextEspecie.getText().toString().trim();
         String raca = editTextRaca.getText().toString().trim();
@@ -165,6 +184,7 @@ public class FragmentAnimais extends Fragment {
 
         // Cria um novo objeto Animal com os valores extraídos da tela
         Animal animal = new Animal();
+        animal.setId(Integer.parseInt(id));
         animal.setNome(nome);
         animal.setEspecie(especie);
         animal.setRaca(raca);
@@ -184,10 +204,35 @@ public class FragmentAnimais extends Fragment {
 
     // Método para limpar os campos
     private void limparCampos() {
+        editTextId.setText("");
         editTextNome.setText("");
         editTextEspecie.setText("");
         editTextRaca.setText("");
         editTextIdade.setText("");
         editTextCpfDono.setText("");
+    }
+
+    // Método para verificar se todos os campos estão preenchidos
+    private boolean camposValidos() {
+        String id = editTextId.getText().toString().trim();
+        String nome = editTextNome.getText().toString().trim();
+        String especie = editTextEspecie.getText().toString().trim();
+        String raca = editTextRaca.getText().toString().trim();
+        String idadeStr = editTextIdade.getText().toString().trim();
+        String cpfDono = editTextCpfDono.getText().toString().trim();
+
+        // Verifica se algum campo está vazio ou idade igual a 0
+        if (nome.isEmpty() || especie.isEmpty() || raca.isEmpty() || cpfDono.isEmpty() || idadeStr.isEmpty() || id.isEmpty()) {
+            Toast.makeText(view.getContext(), "Preencha todos os campos", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        int idade = Integer.parseInt(idadeStr);
+        if (idade == 0) {
+            Toast.makeText(view.getContext(), "Idade não pode ser zero", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
     }
 }

@@ -2,7 +2,7 @@ package br.gustavoIgnacio.easypetvet;
 
 /*
 @author: <Gustavo da Silva Ignacio 1110482313006>
-*/
+ */
 
 import android.os.Bundle;
 
@@ -13,16 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class FragmentInicial extends Fragment {
-	
-	private View view;
+
+    private View view;
 
     public FragmentInicial() {
         super();
     }
 
-    @Override
+     @ Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_inicial, container, false);
-		return view;
+        return view;
     }
 }

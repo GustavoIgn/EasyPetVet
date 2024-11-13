@@ -6,6 +6,7 @@
     <string name="raca">Raça</string>
     <string name="idade">Idade</string>
 	<string name="cpf_dono">CPF do Dono</string>
+	<string name="id">ID (Tabela)</string>
     <string name="salvar">Salvar</string>
 	<string name="editar">Editar</string>
 	<string name="apagar">Apagar</string>
@@ -15,12 +16,19 @@
     <string name="animal_cadastrado">Animal cadastrado com sucesso!</string>
     <string name="animais">Animais</string>
     <string name="consultas">Consultas</string>
-    <string name="vacinas">Vacinas</string>
     <string name="adicionar_consulta">Adicionar Consulta</string>
-    <string name="adicionar_vacina">Adicionar Vacina</string>
     <string name="voltar">Voltar</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="inicio">Bem Vindo ao EasyPetVet!</string>
 	<string name="tela_animal">Informações do Animal</string>
+	<string name="tela_consulta">Informações da Consulta</string>
+	<string name="data">Data (DD/MM/AA)</string>
+	<string name="descricao">Descrição</string>
+	<string name="emergencia">Emergencia</string>
+    <string name="rotina">Rotina</string>
+    <string name="prioridade">Prioridade</string>
+    <string name="motivo_emergencia">Motivo da Emergência</string>
+    <string name="tempo_estimado_atendimento">Tempo Estimado de Atendimento</string>
+    <string name="recorrencia">Recorrência</string>
+    <string name="checklist_saude">Checklist de Saúde</string>
+    <string name="proxima_consulta">Próxima Consulta</string>
 </resources>

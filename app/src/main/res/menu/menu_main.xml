@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
         android:id="@+id/menu_animais"
@@ -8,9 +8,6 @@
         android:id="@+id/menu_consultas"
         android:title="@string/consultas" />
     <item
-	android:id="@+id/menu_vacinas"
-	android:title="@string/vacinas" />
-    <item
-	android:id="@+id/menu_voltar"
-	android:title="@string/voltar" />
+		android:id="@+id/menu_voltar"
+		android:title="@string/voltar" />
 </menu>

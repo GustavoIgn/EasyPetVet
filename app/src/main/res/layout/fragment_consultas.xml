@@ -4,118 +4,182 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/design_default_color_secondary_variant"
+    android:background="@color/fundo"
+    android:orientation="vertical"
     tools:context=".FragmentConsultas">
 
     <!-- Título do Fragment -->
     <TextView
-        android:id="@+id/tvTituloConsulta"
+        android:id="@+id/tvTituloConsultas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registrar Consulta"
-        android:textSize="24sp"
-        android:textColor="#ffffff"
+        android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-medium"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
-
-    <!-- Tipo de Consulta -->
-    <TextView
-        android:id="@+id/tvTipoConsulta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tipo de Consulta"
-        android:textSize="18sp"
+        android:text="@string/tela_consulta"
         android:textColor="#ffffff"
-        app:layout_constraintTop_toBottomOf="@id/tvTituloConsulta"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioGroup
-        android:id="@+id/radioGroupTipoConsulta"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/spAnimais"
+        android:layout_width="327dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloConsultas" />
+
+    <!-- Campo Data -->
+    <EditText
+        android:id="@+id/editTextData"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvTipoConsulta"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#4B4B4B"
+        android:hint="@string/data"
+        android:padding="12dp"
+        android:textColorHint="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp">
+        app:layout_constraintTop_toBottomOf="@+id/spAnimais" />
+
+    <!-- Campo Descricao -->
+    <EditText
+        android:id="@+id/editTextDescricao"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#4B4B4B"
+        android:hint="@string/descricao"
+        android:padding="12dp"
+        android:textColorHint="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextData" />
+
+    <!-- Tipos Consulta -->
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDescricao"
+        app:layout_constraintEnd_toEndOf="@+id/buttonListar"
+        app:layout_constraintStart_toEndOf="@+id/buttonListar">
 
         <RadioButton
-            android:id="@+id/radioConsultaEmergencia"
+            android:id="@+id/radioEmergencia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Emergência"
-            android:textColor="#ffffff" />
+            android:text="@string/emergencia" />
 
         <RadioButton
-            android:id="@+id/radioConsultaRotina"
+            android:id="@+id/radioRotina"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rotina"
-            android:textColor="#ffffff"
-            android:layout_marginStart="16dp" />
+            android:text="@string/rotina" />
     </RadioGroup>
 
-    <!-- Data da Consulta -->
-    <TextView
-	    android:id="@+id/tvDataConsulta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Data da Consulta"
-        android:textSize="18sp"
-        android:textColor="#ffffff"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/radioGroupTipoConsulta"
-        app:layout_constraintStart_toStartOf="parent"/>
-
+    <!-- Campo Prioridade (para Consulta Emergência) -->
     <EditText
-        android:id="@+id/editTextDataConsulta"
-        android:layout_width="match_parent"
+        android:id="@+id/editTextPrioridade"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="DD/MM/AAAA"
-        android:inputType="date"
-        android:padding="12dp"
-        android:backgroundTint="#a0f0a4"
-        android:textColorHint="#ffffff"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintTop_toBottomOf="@id/tvDataConsulta"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <!-- Descrição da Consulta -->
-    <TextView
-		android:id="@+id/tvDescricaoConsulta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Descrição"
-        android:textSize="18sp"
-        android:textColor="#ffffff"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/editTextDataConsulta"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <EditText
-        android:id="@+id/editTextDescricaoConsulta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Descrição da consulta"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#4B4B4B"
+        android:hint="@string/prioridade"
         android:padding="12dp"
-        android:backgroundTint="#a0f0a4"
         android:textColorHint="#ffffff"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tvDescricaoConsulta"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        android:visibility="gone" />
 
-    <!-- Botão Salvar -->
-    <Button
-        android:id="@+id/buttonSalvarConsulta"
-        android:layout_width="wrap_content"
+    <!-- Campo Tempo Estimado Atendimento (para Consulta Emergência) -->
+    <EditText
+        android:id="@+id/editTextTempoEstimadoAtendimento"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Salvar Consulta"
-        android:textColor="#ffffff"
-        android:backgroundTint="#4ebf5d"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#4B4B4B"
+        android:hint="@string/tempo_estimado_atendimento"
         android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/editTextDescricaoConsulta"
-        app:layout_constraintStart_toStartOf="parent"/>
-		
+        android:textColorHint="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPrioridade"
+        android:visibility="gone" />
+
+    <!-- Campo Recorrência (para Consulta Rotina) -->
+    <EditText
+        android:id="@+id/editTextRecorrencia"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#4B4B4B"
+        android:hint="@string/recorrencia"
+        android:padding="12dp"
+        android:textColorHint="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTempoEstimadoAtendimento"
+        android:visibility="gone" />
+
+    <!-- Campo Próxima Consulta (para Consulta Rotina) -->
+    <EditText
+        android:id="@+id/editTextProximaConsulta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#4B4B4B"
+        android:hint="@string/proxima_consulta"
+        android:padding="12dp"
+        android:textColorHint="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRecorrencia"
+        android:visibility="gone" />
+
+	<!-- Botões CRUD -->
+	<Button
+		android:id="@+id/buttonSalvar"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="16dp"
+		android:backgroundTint="#4ebf5d"
+		android:padding="12dp"
+		android:text="@string/salvar"
+		android:textColor="#ffffff"
+		app:layout_constraintTop_toBottomOf="@+id/editTextProximaConsulta"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<Button
+		android:id="@+id/buttonListar"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="8dp"
+		android:backgroundTint="#5BC0DE"
+		android:padding="12dp"
+		android:text="@string/listar"
+		android:textColor="#ffffff"
+		app:layout_constraintTop_toBottomOf="@+id/buttonSalvar"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

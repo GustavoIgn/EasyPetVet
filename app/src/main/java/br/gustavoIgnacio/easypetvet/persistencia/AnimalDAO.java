@@ -43,20 +43,20 @@ public class AnimalDAO implements ICRUDDao<Animal>{
 	@Override
 	public int update(Animal animal) throws SQLException {
 		ContentValues contentValues = getContentValues(animal);
-		int ret = db.update(DatabaseHelper.TABELA_ANIMAL, contentValues, "cpf_dono = ?", new String[]{animal.getCPFDono()});
+		int ret = db.update(DatabaseHelper.TABELA_ANIMAL, contentValues, "id = ?", new String[]{String.valueOf(animal.getId())});
 		return ret;
 	}
 	
 	@Override
 	public void delete(Animal animal) throws SQLException {
 		ContentValues contentValues = getContentValues(animal);
-		db.delete(DatabaseHelper.TABELA_ANIMAL, "cpf_dono = ?", new String[]{animal.getCPFDono()});
+		db.delete(DatabaseHelper.TABELA_ANIMAL, "id = ?", new String[]{String.valueOf(animal.getId())});
 	}
 	
 	@Override
-	public Animal findByCPF(Animal animal) throws SQLException {
+	public Animal findById(String id) throws SQLException {
 		Animal resultadoAnimal = null;
-		Cursor cursor = db.query(DatabaseHelper.TABELA_ANIMAL, null, "cpf_dono =", new String[]{animal.getCPFDono()}, null, null, null);
+		Cursor cursor = db.query(DatabaseHelper.TABELA_ANIMAL, null, "id = ?", new String[]{id}, null, null, null);
 
 		if (cursor != null && cursor.moveToFirst()) {
 			resultadoAnimal = cursorToAnimal(cursor);

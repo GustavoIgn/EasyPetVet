@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/design_default_color_secondary_variant"
+    android:background="@color/fundo"
+	android:orientation="vertical"
     tools:context=".FragmentAnimais">
 
     <!-- Título do Fragment -->
@@ -29,10 +30,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="#a0f0a4"
+        android:backgroundTint="#4B4B4B"
         android:hint="@string/nome"
         android:padding="12dp"
-        android:textColorHint="#000000"
+        android:textColorHint="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTituloAnimal" />
@@ -45,7 +46,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="#a0f0a4"
+        android:backgroundTint="#4B4B4B"
         android:hint="@string/especie"
         android:padding="12dp"
         android:textColorHint="#ffffff"
@@ -61,7 +62,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="#a0f0a4"
+        android:backgroundTint="#4B4B4B"
         android:hint="@string/raca"
         android:padding="12dp"
         android:textColorHint="#ffffff"
@@ -77,7 +78,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="#a0f0a4"
+        android:backgroundTint="#4B4B4B"
         android:hint="@string/idade"
         android:inputType="number"
         android:padding="12dp"
@@ -92,14 +93,29 @@
         android:layout_width="379dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
-        android:backgroundTint="#a0f0a4"
+        android:backgroundTint="#4B4B4B"
         android:hint="@string/cpf_dono"
         android:inputType="text"
         android:padding="12dp"
         android:textColorHint="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextIdade" />
+		
+	<!-- Campo ID (Delete, Update, Search) -->
+    <EditText
+        android:id="@+id/editTextId"
+        android:layout_width="379dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:backgroundTint="#4B4B4B"
+        android:hint="@string/id"
+        android:inputType="number"
+        android:padding="12dp"
+        android:textColorHint="#ffffff"
         app:layout_constraintEnd_toEndOf="@+id/buttonListar"
         app:layout_constraintStart_toEndOf="@+id/buttonListar"
-        app:layout_constraintTop_toBottomOf="@+id/editTextIdade" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCpfDono" />
 
     <!-- Botoes CRUD -->
     <Button
@@ -110,7 +126,7 @@
         android:backgroundTint="#4ebf5d"
         android:padding="12dp"
         android:text="@string/salvar"
-        android:textColor="#4E342E"
+        android:textColor="#ffffff"
         app:layout_constraintBaseline_toBaselineOf="@+id/buttonListar"
         app:layout_constraintEnd_toStartOf="@+id/buttonListar"
         app:layout_constraintStart_toStartOf="parent" />
@@ -120,10 +136,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#4ebf5d"
+        android:backgroundTint="#5BC0DE"
         android:padding="12dp"
         android:text="@string/listar"
-        android:textColor="#4E342E"
+        android:textColor="#ffffff"
         app:layout_constraintBaseline_toBaselineOf="@+id/buttonApagar"
         app:layout_constraintEnd_toStartOf="@+id/buttonApagar"
         app:layout_constraintStart_toEndOf="@+id/buttonSalvar" />
@@ -134,22 +150,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#f44336"
+        android:backgroundTint="#FF6B6B"
         android:padding="12dp"
         android:text="@string/apagar"
         android:textColor="#ffffff"
         app:layout_constraintEnd_toStartOf="@+id/buttonEditar"
         app:layout_constraintStart_toEndOf="@+id/buttonListar"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCpfDono" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextId" />
 
     <Button
         android:id="@+id/buttonEditar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#ff9800"
+        android:backgroundTint="#FFA500"
         android:padding="12dp"
         android:text="@string/editar"
-        android:textColor="#424242"
+        android:textColor="#ffffff"
         app:layout_constraintBaseline_toBaselineOf="@+id/buttonApagar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonApagar" />
@@ -159,7 +175,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="#ff9800"
+        android:backgroundTint="#0074D9"
         android:padding="12dp"
         android:text="@string/buscar"
         android:textColor="#ffffff"
@@ -167,16 +183,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSalvar" />
 
-    <TextView
-        android:id="@+id/tvListaAnimais"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:scrollbars="vertical"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBuscar" />
+	<ScrollView
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		android:layout_marginTop="17dp"
+		android:paddingStart="16dp"
+		android:paddingEnd="16dp" 
+		android:fillViewport="true"
+		app:layout_constraintTop_toBottomOf="@+id/buttonBuscar"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent">
+
+		<TextView
+			android:id="@+id/tvListaAnimais"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="16dp"
+			android:textColor="#000000"
+			android:scrollbars="vertical"
+			android:textSize="16sp"
+			android:lineSpacingExtra="4dp"
+			android:textStyle="bold" 
+			android:background="@drawable/borda_preta"
+			android:gravity="center|start"
+			android:textAlignment="viewStart"
+			android:justificationMode="inter_word"/>
+	</ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

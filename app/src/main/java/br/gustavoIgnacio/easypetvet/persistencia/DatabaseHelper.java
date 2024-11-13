@@ -15,7 +15,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String TABELA_ANIMAL = "animais";
     public static final String TABELA_CONSULTA = "consulta";
-    public static final String TABELA_VACINA = "vacina";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -41,23 +40,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "descricao TEXT, " +
                 "FOREIGN KEY(animal_id) REFERENCES " + TABELA_ANIMAL + "(id))";
         db.execSQL(createConsultaTable);
-
-        // Criar tabela Vacina
-        String createVacinaTable = "CREATE TABLE " + TABELA_VACINA + " (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "animal_id INTEGER, " +
-                "nome TEXT, " +
-                "data_aplicacao TEXT, " +
-                "proxima_aplicacao TEXT, " +
-                "FOREIGN KEY(animal_id) REFERENCES " + TABELA_ANIMAL + "(id))";
-        db.execSQL(createVacinaTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABELA_ANIMAL);
         db.execSQL("DROP TABLE IF EXISTS " + TABELA_CONSULTA);
-        db.execSQL("DROP TABLE IF EXISTS " + TABELA_VACINA);
         onCreate(db);
     }
 }

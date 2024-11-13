@@ -1,4 +1,4 @@
-package br.gustavoIgnacio.easypetvet.persistencia;
+package br.gustavoIgnacio.easypetvet.controller;
 
 /*
 @author:<Gustavo da Silva Ignacio 1110482313006>
@@ -7,7 +7,7 @@ package br.gustavoIgnacio.easypetvet.persistencia;
 import android.database.SQLException;
 import java.util.List;
 
-public interface ICRUDDao<T> {
+public interface IConsultaController<T> {
 
 	public void insert(T t) throws SQLException;
 	public int update(T t) throws SQLException;
