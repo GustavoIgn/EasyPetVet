@@ -9,28 +9,19 @@ import java.util.Date;
 public class ConsultaEmergencia extends Consulta {
     private String prioridade;
     private int tempoEstimadoAtendimento;
+    private int animalId;
 
-    public ConsultaEmergencia(int id, Animal animal, Date data, String descricao, String prioridade, int tempoEstimadoAtendimento) {
-        super(id, animal, data, descricao);
+    public ConsultaEmergencia() {
+        super();
+    }
+
+    public ConsultaEmergencia(Animal animal, String data, String descricao, String prioridade, int tempoEstimadoAtendimento) {
+        super(animal.getId(), animal, data, descricao);
         this.prioridade = prioridade;
         this.tempoEstimadoAtendimento = tempoEstimadoAtendimento;
+        this.animalId = animal.getId();
     }
 
-    @Override
-    public void notificar(String mensagem) {
-        System.out.println("Notificação de Consulta de Emergência: " + mensagem);
-    }
-
-    @Override
-    public String toString() {
-        return "ConsultaEmergencia{" +
-                "prioridade='" + prioridade + '\'' +
-                ", tempoEstimadoAtendimento=" + tempoEstimadoAtendimento +
-                ", " + super.toString() +
-                '}';
-    }
-
-    // Getters e Setters para os novos atributos
     public String getPrioridade() {
         return prioridade;
     }
@@ -46,9 +37,27 @@ public class ConsultaEmergencia extends Consulta {
     public void setTempoEstimadoAtendimento(int tempoEstimadoAtendimento) {
         this.tempoEstimadoAtendimento = tempoEstimadoAtendimento;
     }
-	
-	public String getTipo() {
-		return "Emergencia";
-	}
-}
 
+    public String getTipo() {
+        return "Emergencia";
+    }
+
+    public void setAnimalId(int animalId) {
+        this.animalId = animalId;
+    }
+
+    public int getIdAnimal() {
+        return animalId;
+    }
+
+     @ Override
+    public String toString() {
+        return getTipo() +
+		"| ID=" + getId() +
+        "| ANIMAL_ID=" + getIdAnimal() +
+        "| DATA=" + getData() +
+        "| DESCRIÇÃO=" + getDescricao() +
+        "| PRIORIDADE=" + prioridade +
+        "| TEMPO_ESTIMADO=" + tempoEstimadoAtendimento + "h";
+    }
+}

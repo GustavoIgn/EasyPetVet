@@ -12,6 +12,7 @@
 	<string name="apagar">Apagar</string>
 	<string name="listar">Listar</string>
     <string name="buscar">Buscar</string>
+	<string name="novaConsulta">Nova Consulta</string>
     <string name="campos_obrigatorios">Preencha todos os campos obrigatórios!</string>
     <string name="animal_cadastrado">Animal cadastrado com sucesso!</string>
     <string name="animais">Animais</string>
@@ -31,4 +32,6 @@
     <string name="recorrencia">Recorrência</string>
     <string name="checklist_saude">Checklist de Saúde</string>
     <string name="proxima_consulta">Próxima Consulta</string>
+	<string name="consulta_emergencia">Consulta de Emergencia</string>
+	<string name="consulta_rotina">Consulta de Rotina</string>
 </resources>

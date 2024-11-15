@@ -5,63 +5,62 @@ package br.gustavoIgnacio.easypetvet.controller;
  */
 
 import android.content.Context;
-import br.gustavoIgnacio.easypetvet.model.Consulta;
+import br.gustavoIgnacio.easypetvet.model.ConsultaEmergencia;
 import br.gustavoIgnacio.easypetvet.model. * ;
-import br.gustavoIgnacio.easypetvet.persistencia.ConsultaDAO;
+import br.gustavoIgnacio.easypetvet.persistencia.ConsultaEmergenciaDAO;
 import android.database.SQLException;
 import java.util.List;
 import java.util.ArrayList;
 
-public class ConsultaEmergenciaController {
+public class ConsultaEmergenciaController implements IConsultaController<ConsultaEmergencia> {
 
-	/*
 
-    private final ConsultaDAO consultaDAO;
+    private final ConsultaEmergenciaDAO consultaEmergenciaDAO;
 
-    public ConsultaEmergenciaController(ConsultaDAO consultaDAO) {
-        this.consultaDAO = consultaDAO;
+	public ConsultaEmergenciaController(ConsultaEmergenciaDAO consultaEDAO) {
+		this.consultaEmergenciaDAO = consultaEDAO;
+	}
+
+     @ Override
+    public void insert(ConsultaEmergencia consulta)throws SQLException {
+        consultaEmergenciaDAO.open();
+        consultaEmergenciaDAO.insert(consulta);
+        consultaEmergenciaDAO.close();
     }
 
      @ Override
-    public void insert(Consulta consulta)throws SQLException {
-        consultaDAO.open();
-        consultaDAO.insert(consulta);
-        consultaDAO.close();
-    }
-
-     @ Override
-    public int update(Consulta consulta)throws SQLException {
-        if (consultaDAO.open() == null) {
-            consultaDAO.open();
+    public int update(ConsultaEmergencia consulta)throws SQLException {
+        if (consultaEmergenciaDAO.open() == null) {
+            consultaEmergenciaDAO.open();
         }
-        consultaDAO.update(consulta);
-        consultaDAO.close();
+        consultaEmergenciaDAO.update(consulta);
+        consultaEmergenciaDAO.close();
         return 1;
     }
 
      @ Override
-    public void delete (Consulta consulta)throws SQLException {
-        if (consultaDAO.open() == null) {
-            consultaDAO.open();
+    public void delete (ConsultaEmergencia consulta)throws SQLException {
+        if (consultaEmergenciaDAO.open() == null) {
+            consultaEmergenciaDAO.open();
         }
-        consultaDAO.delete(consulta);
-        consultaDAO.close();
+        consultaEmergenciaDAO.delete(consulta);
+        consultaEmergenciaDAO.close();
     }
 
      @ Override
-    public Consulta findById(String id)throws SQLException {
-        if (consultaDAO.open() == null) {
-            consultaDAO.open();
+    public ConsultaEmergencia findById(String id)throws SQLException {
+        if (consultaEmergenciaDAO.open() == null) {
+            consultaEmergenciaDAO.open();
         }
-        return consultaDAO.findById(id);
+        return consultaEmergenciaDAO.findById(id);
     }
 
      @ Override
-    public List < Consulta > findALL()throws SQLException {
-        if (consultaDAO.open() == null) {
-            consultaDAO.open();
+    public List < ConsultaEmergencia > findALL()throws SQLException {
+        if (consultaEmergenciaDAO.open() == null) {
+            consultaEmergenciaDAO.open();
         }
 
-        return consultaDAO.findALL();
-    } */
+        return consultaEmergenciaDAO.findALL();
+    }
 }

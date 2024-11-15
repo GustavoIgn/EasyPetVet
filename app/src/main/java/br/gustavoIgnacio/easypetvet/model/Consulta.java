@@ -6,17 +6,21 @@ package br.gustavoIgnacio.easypetvet.model;
 
 import java.util.Date;
 
-public abstract class Consulta implements INotificavel {
+public abstract class Consulta {
     private int id;
     private Animal animal;
-    private Date data;
+    private String data;
     private String descricao;
+	private int animalId;
+	
+	public Consulta(){}
 
-    public Consulta(int id, Animal animal, Date data, String descricao) {
+    public Consulta(int id, Animal animal, String data, String descricao) {
         this.id = id;
         this.animal = animal;
         this.data = data;
         this.descricao = descricao;
+		this.animalId = animal.getId();
     }
 
     public int getId() {
@@ -35,11 +39,11 @@ public abstract class Consulta implements INotificavel {
         this.animal = animal;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
@@ -50,12 +54,18 @@ public abstract class Consulta implements INotificavel {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
-     @ Override
-    public String toString() {
-        return "Consulta{id=" + id + ", animal=" + animal.getNome() + ", data=" + data + ", descricao='" + descricao + "'}";
+	
+	public void setAnimalId(int animalId) {
+        this.animalId = animalId;
     }
 
-     @ Override
-    public abstract void notificar(String mensagem);
+    public int getIdAnimal() {
+        return animalId;
+    }
+
+    @Override
+    public String toString() {
+        return "Consulta{id=" + id + ", animal=" + animal.getNome() + ", data='" + data + "', descricao='" + descricao + "'}";
+    }
+
 }

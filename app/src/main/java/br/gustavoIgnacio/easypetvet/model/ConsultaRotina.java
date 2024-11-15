@@ -9,29 +9,20 @@ import java.util.List;
 
 public class ConsultaRotina extends Consulta {
     private String recorrencia;
-    private Date proximaConsulta;
+    private String proximaConsulta;
+    private int animalId;
 
-    public ConsultaRotina(int id, Animal animal, Date data, String descricao, String recorrencia, Date proximaConsulta) {
-        super(id, animal, data, descricao);
+    public ConsultaRotina() {
+        super();
+    }
+
+    public ConsultaRotina(Animal animal, String data, String descricao, String recorrencia, String proximaConsulta) {
+        super(animal.getId(), animal, data, descricao); // Passando o animal corretamente
         this.recorrencia = recorrencia;
         this.proximaConsulta = proximaConsulta;
+        this.animalId = animal.getId();
     }
 
-    @Override
-    public void notificar(String mensagem) {
-        System.out.println("Notificação de Consulta de Rotina: " + mensagem);
-    }
-
-    @Override
-    public String toString() {
-        return "ConsultaRotina{" +
-                "recorrencia='" + recorrencia + '\'' +
-                ", proximaConsulta=" + proximaConsulta +
-                ", " + super.toString() +
-                '}';
-    }
-
-    // Getters e Setters para os novos atributos
     public String getRecorrencia() {
         return recorrencia;
     }
@@ -40,15 +31,34 @@ public class ConsultaRotina extends Consulta {
         this.recorrencia = recorrencia;
     }
 
-    public Date getProximaConsulta() {
+    public String getProximaConsulta() {
         return proximaConsulta;
     }
 
-    public void setProximaConsulta(Date proximaConsulta) {
+    public void setProximaConsulta(String proximaConsulta) {
         this.proximaConsulta = proximaConsulta;
     }
-	
-	public String getTipo() {
-		return "Rotina";
-	}
+
+    public String getTipo() {
+        return "Rotina";
+    }
+
+    public void setAnimalId(int animalId) {
+        this.animalId = animalId;
+    }
+
+    public int getIdAnimal() {
+        return animalId;
+    }
+
+     @ Override
+    public String toString() {
+        return getTipo() + 
+		"| ID=" + getId() +
+        "| ANIMAL-ID=" + getIdAnimal() +
+        "| DATA=" + getData() +
+        "| DESCRIÇÃO=" + getDescricao() +
+        "| RECORRÊNCIA=" + recorrencia +
+        "| PROXIMA-CONSULTA=" + proximaConsulta;
+    }
 }

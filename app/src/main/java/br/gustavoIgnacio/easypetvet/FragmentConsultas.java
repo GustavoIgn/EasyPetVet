@@ -17,17 +17,21 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.Toast;
 import br.gustavoIgnacio.easypetvet.model.Animal;
+import br.gustavoIgnacio.easypetvet.model.ConsultaEmergencia;
+import br.gustavoIgnacio.easypetvet.model.ConsultaRotina;
+import br.gustavoIgnacio.easypetvet.persistencia.AnimalDAO;
 import br.gustavoIgnacio.easypetvet.persistencia. * ;
 import br.gustavoIgnacio.easypetvet.controller.AnimalController;
-
+import br.gustavoIgnacio.easypetvet.controller.ConsultaEmergenciaController;
+import br.gustavoIgnacio.easypetvet.controller.ConsultaRotinaController;
+import android.content.Intent;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.List;
 import android.database.SQLException;
 import android.widget.TextView;
-
-import androidx.fragment.app.Fragment;
 
 public class FragmentConsultas extends Fragment {
 
@@ -43,13 +47,13 @@ public class FragmentConsultas extends Fragment {
     private RadioButton radioEmergencia,
     radioRotina;
     private Button buttonSalvar,
-    buttonListar,
-    buttonApagar,
-    buttonEditar,
-    buttonBuscar;
+    buttonListar;
     private AnimalDAO animalDAO;
     private AnimalController animalCont;
     private List < Animal > animais;
+    private ConsultaEmergenciaController consultaEmergenciaController;
+    private ConsultaRotinaController consultaRotinaController;
+    private Animal animalSelecionado;
 
     public FragmentConsultas() {
         super();
@@ -74,12 +78,12 @@ public class FragmentConsultas extends Fragment {
         radioRotina = view.findViewById(R.id.radioRotina);
         buttonSalvar = view.findViewById(R.id.buttonSalvar);
         buttonListar = view.findViewById(R.id.buttonListar);
-        buttonApagar = view.findViewById(R.id.buttonApagar);
-        buttonEditar = view.findViewById(R.id.buttonEditar);
-        buttonBuscar = view.findViewById(R.id.buttonBuscar);
 
         animalDAO = new AnimalDAO(view.getContext());
         animalCont = new AnimalController(animalDAO);
+        consultaEmergenciaController = new ConsultaEmergenciaController(new ConsultaEmergenciaDAO(view.getContext()));
+        consultaRotinaController = new ConsultaRotinaController(new ConsultaRotinaDAO(view.getContext()));
+
         preencheSpinner();
 
         // Configura a visibilidade inicial dos campos com base na seleção
@@ -92,147 +96,50 @@ public class FragmentConsultas extends Fragment {
         });
 
         // Configuração dos botões
-        buttonSalvar.setOnClickListener(v->salvarAnimal());
-        buttonListar.setOnClickListener(v->listarAnimais());
-        buttonApagar.setOnClickListener(v->apagarAnimal());
-        buttonEditar.setOnClickListener(v->editarAnimal());
-        buttonBuscar.setOnClickListener(v->buscarAnimais());
+        buttonSalvar.setOnClickListener(v->salvarConsulta());
+        buttonListar.setOnClickListener(v->listarConsultas());
 
         return view;
     }
 
-    ------------------------------------------------------------ -
-
     // Método para salvar Consulta
     private void salvarConsulta() {
-        if (!camposValidos())
+        if (animalSelecionado == null) {
+            Toast.makeText(view.getContext(), "Selecione um animal", Toast.LENGTH_LONG).show();
             return;
+        }
 
-        if (radioEmergencia.isChecked()) {
-            // Criação de uma consulta de emergência
-            ConsultaEmergencia consultaEmergencia = montaConsultaEmergencia();
-            try {
-                ConsultaEmergenciaController.insert(consultaEmergencia);
+        if (!camposValidos()) {
+            return;
+        }
+
+        try {
+            if (radioEmergencia.isChecked()) {
+                ConsultaEmergencia consultaEmergencia = montaConsultaEmergencia();
+                consultaEmergenciaController.insert(consultaEmergencia);
                 Toast.makeText(view.getContext(), "Consulta de Emergência Inserida com Sucesso", Toast.LENGTH_LONG).show();
-            } catch (SQLException e) {
-                Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        } else if (radioRotina.isChecked()) {
-            // Criação de uma consulta de rotina
-            ConsultaRotina consultaRotina = montaConsultaRotina();
-            try {
-                ConsultaRotinaController.insert(consultaRotina);
+            } else if (radioRotina.isChecked()) {
+                ConsultaRotina consultaRotina = montaConsultaRotina();
+                consultaRotinaController.insert(consultaRotina);
                 Toast.makeText(view.getContext(), "Consulta de Rotina Inserida com Sucesso", Toast.LENGTH_LONG).show();
-            } catch (SQLException e) {
-                Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             }
-        }
-        limparCampos();
-    }
-
-    // Métodos auxiliares para montar consulta de emergência e de rotina
-    private ConsultaEmergencia montaConsultaEmergencia() {
-        Animal animalSelecionado = (Animal)spAnimais.getSelectedItem();
-        String data = editTextData.getText().toString().trim();
-        String descricao = editTextDescricao.getText().toString().trim();
-        String prioridade = editTextPrioridade.getText().toString().trim();
-        String tempoEstimadoAtendimento = editTextTempoEstimadoAtendimento.getText().toString().trim();
-
-        return new ConsultaEmergencia(animalSelecionado, data, descricao, prioridade, tempoEstimadoAtendimento);
-    }
-
-    private ConsultaRotina montaConsultaRotina() {
-        Animal animalSelecionado = (Animal)spAnimais.getSelectedItem();
-        String data = editTextData.getText().toString().trim();
-        String descricao = editTextDescricao.getText().toString().trim();
-        String recorrencia = editTextRecorrencia.getText().toString().trim();
-        String proximaConsulta = editTextProximaConsulta.getText().toString().trim();
-
-        return new ConsultaRotina(animalSelecionado, data, descricao, recorrencia, proximaConsulta);
-    }
-
-    // Método para buscar por Id
-    private void buscarAnimais() {
-        String id = editTextId.getText().toString().trim();
-
-        if (id.isEmpty()) {
-            Toast.makeText(view.getContext(), "Digite o ID conforme Tabela", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        try {
-            Animal animal = animalController.findById(id);
-            if (animal != null) {
-                preencheCampos(animal);
-            } else {
-                Toast.makeText(view.getContext(), "Animal não Encontrado", Toast.LENGTH_LONG).show();
-                limparCampos();
-            }
+            limparCampos();
         } catch (SQLException e) {
             Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
-    // Método para Listar animais
-    private void listarAnimais() {
-        try {
-            List < Animal > animais = animalController.findALL();
-            StringBuffer buffer = new StringBuffer();
-            for (Animal a: animais) {
-                buffer.append(a.toString() + "\n");
-                buffer.append("____________________________________\n");
-            }
-
-            tvResultado.setText(buffer.toString());
-        } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-        }
+    private void listarConsultas() {
+		FragmentListarConsultas fragmentListarConsultas = new FragmentListarConsultas();	
+		
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment, fragmentListarConsultas);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
-    // Método para apagar um animal
-    private void apagarAnimal() {
-        if (!camposValidos())
-            return;
-        Animal animal = montaAnimal();
-        try {
-            animalController.delete(animal);
-            Toast.makeText(view.getContext(), "Animal Apagado com Sucesso", Toast.LENGTH_LONG).show();
-            listarAnimais();
-        } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-
-        limparCampos();
-    }
-
-    // Método para editar um animal
-    private void editarAnimal() {
-        if (!camposValidos())
-            return;
-        Animal animal = montaAnimal();
-
-        try {
-            animalController.update(animal);
-            Toast.makeText(view.getContext(), "Animal Atualizado com Sucesso", Toast.LENGTH_LONG).show();
-            listarAnimais();
-        } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-
-        limparCampos();
-    }
-
-    private void preencheCampos(Animal animal) {
-        editTextNome.setText(animal.getNome());
-        editTextEspecie.setText(animal.getEspecie());
-        editTextRaca.setText(animal.getRaca());
-        editTextIdade.setText(String.valueOf(animal.getIdade()));
-        editTextCpfDono.setText(animal.getCPFDono());
-    }
-
-    // Método para limpar os campos após salvar ou editar
     private void limparCampos() {
-		editTextData.setText("");
+        editTextData.setText("");
         editTextDescricao.setText("");
         editTextPrioridade.setText("");
         editTextTempoEstimadoAtendimento.setText("");
@@ -240,33 +147,17 @@ public class FragmentConsultas extends Fragment {
         editTextProximaConsulta.setText("");
     }
 
-    // Método para verificar se todos os campos estão preenchidos
     private boolean camposValidos() {
-		String data = editTextData.getText().toString().trim();
+        String data = editTextData.getText().toString().trim();
         String descricao = editTextDescricao.getText().toString().trim();
-        String prioridade = editTextPrioridade.getText().toString().trim();
-        String tempoEstimadoAtendimento = editTextTempoEstimadoAtendimento.getText().toString().trim();
-        String recorrencia = editTextRecorrencia.getText().toString().trim();
-        String proximaConsulta = editTextProximaConsulta.getText().toString().trim();
 
-        // Verifica se algum campo está vazio ou idade igual a 0
-        if (nome.isEmpty() || especie.isEmpty() || raca.isEmpty() || cpfDono.isEmpty() || idadeStr.isEmpty() || id.isEmpty()) {
+        if (data.isEmpty() || descricao.isEmpty()) {
             Toast.makeText(view.getContext(), "Preencha todos os campos", Toast.LENGTH_LONG).show();
             return false;
         }
-
-        int idade = Integer.parseInt(idadeStr);
-        if (idade == 0) {
-            Toast.makeText(view.getContext(), "Idade não pode ser zero", Toast.LENGTH_LONG).show();
-            return false;
-        }
-
         return true;
     }
 
-    -------------------------------------------------------- -
-
-    // Função para exibir campos de emergência
     private void showEmergenciaFields() {
         editTextPrioridade.setVisibility(View.VISIBLE);
         editTextTempoEstimadoAtendimento.setVisibility(View.VISIBLE);
@@ -274,7 +165,6 @@ public class FragmentConsultas extends Fragment {
         editTextProximaConsulta.setVisibility(View.GONE);
     }
 
-    // Função para exibir campos de rotina
     private void showRotinaFields() {
         editTextPrioridade.setVisibility(View.GONE);
         editTextTempoEstimadoAtendimento.setVisibility(View.GONE);
@@ -283,57 +173,78 @@ public class FragmentConsultas extends Fragment {
     }
 
     private void preencheSpinner() {
-        // placeholder
         String placeholder = "Escolha um Animal";
 
         try {
-            // animais do banco de dados
             animais = animalCont.findALL();
-
-            // Se a lista estiver vazia, cria uma nova lista
             if (animais == null) {
                 animais = new ArrayList <  > ();
             }
 
-            // Cria uma nova lista de strings para exibir no Spinner
             List < String > animalDisplayList = new ArrayList <  > ();
             animalDisplayList.add(placeholder);
 
-            // Adiciona uma string formatada para cada animal na lista
             for (Animal animal: animais) {
-                String displayText = "ID= " animal.getId() + "| NOME= " + animal.getNome() + "| ESPÉCIE=" + animal.getEspecie() + "|";
+                String displayText = "ID= " + animal.getId() + "| NOME= " + animal.getNome() + "| ESPÉCIE=" + animal.getEspecie() + "|";
                 animalDisplayList.add(displayText);
             }
 
-            // Configura o adaptador do Spinner com a lista de strings formatadas
-            ArrayAdapter < String > adapter = new ArrayAdapter <  > (getContext(),
-                    android.R.layout.simple_spinner_item,
-                    animalDisplayList);
+            ArrayAdapter < String > adapter = new ArrayAdapter <  > (getContext(), android.R.layout.simple_spinner_item, animalDisplayList);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spAnimais.setAdapter(adapter);
 
-            // Configura o Spinner para evitar seleção do placeholder
             spAnimais.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                  @ Override
                 public void onItemSelected(AdapterView <  ?  > parent, View view, int position, long id) {
-                    if (position == 0) {
-                        spAnimais.setSelection(0);
-                    } else {
-                        Animal selectedAnimal = animais.get(position - 1);
+                    if (position == 0) { // Placeholder
+                        return;
+                    }
+                    // Código para tratar a seleção do animal
+                    String selectedAnimalText = (String)parent.getItemAtPosition(position);
+                    int animalId = Integer.parseInt(selectedAnimalText.split("=")[1].trim().split("\\|")[0].trim());
+
+                    try {
+                        animalSelecionado = animalCont.findById(String.valueOf(animalId));
+
+                        if (animalSelecionado != null) {
+                            Toast.makeText(getContext(), "Animal Selecionado: " + animalSelecionado.getNome(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Animal não encontrado", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (SQLException e) {
+                        Toast.makeText(getContext(), "Erro ao buscar animal: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
 
                  @ Override
-                public void onNothingSelected(AdapterView <  ?  > parent) {
-                    // Aqui você pode tratar o caso em que nada é selecionado, se necessário
-                }
+                public void onNothingSelected(AdapterView <  ?  > parent) {}
             });
 
         } catch (SQLException e) {
             Toast.makeText(getContext(), "Erro ao carregar animais: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        catch (Exception e) {
-            Toast.makeText(getContext(), "Erro inesperado: " + e.getMessage(), Toast.LENGTH_LONG).show();
+    }
+
+    private ConsultaEmergencia montaConsultaEmergencia() {
+        String data = editTextData.getText().toString().trim();
+        String descricao = editTextDescricao.getText().toString().trim();
+        String prioridade = editTextPrioridade.getText().toString().trim();
+        String tempoEstimadoAtendimentoStr = editTextTempoEstimadoAtendimento.getText().toString().trim();
+
+        int tempoEstimadoAtendimento = 0;
+        if (!tempoEstimadoAtendimentoStr.isEmpty()) {
+            tempoEstimadoAtendimento = Integer.parseInt(tempoEstimadoAtendimentoStr);
         }
+
+        return new ConsultaEmergencia(animalSelecionado, data, descricao, prioridade, tempoEstimadoAtendimento);
+    }
+
+    private ConsultaRotina montaConsultaRotina() {
+        String data = editTextData.getText().toString().trim();
+        String descricao = editTextDescricao.getText().toString().trim();
+        String recorrencia = editTextRecorrencia.getText().toString().trim();
+        String proximaConsulta = editTextProximaConsulta.getText().toString().trim();
+
+        return new ConsultaRotina(animalSelecionado, data, descricao, recorrencia, proximaConsulta);
     }
 }
