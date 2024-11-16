@@ -31,7 +31,7 @@ public class FragmentListarConsultas extends Fragment {
     private View view;
     private TextView tvResultado;
     private EditText editTextBuscarId;
-    private Button buttonBuscar;
+    private Button buttonBuscar, buttonVoltar;
     private ConsultaEmergenciaController consultaEmergenciaController;
     private ConsultaRotinaController consultaRotinaController;
     private RadioGroup radioGroup;
@@ -48,6 +48,7 @@ public class FragmentListarConsultas extends Fragment {
         // Inicializa os elementos
         editTextBuscarId = view.findViewById(R.id.editTextBuscarId);
         buttonBuscar = view.findViewById(R.id.buttonBuscar);
+		buttonVoltar = view.findViewById(R.id.buttonVoltar);
         tvResultado = view.findViewById(R.id.tvListaConsultas);
         tvResultado.setMovementMethod(new ScrollingMovementMethod());
 
@@ -63,6 +64,7 @@ public class FragmentListarConsultas extends Fragment {
 
         // Configura o botão de busca
         buttonBuscar.setOnClickListener(v -> buscarConsultaPorId());
+		buttonVoltar.setOnClickListener(v -> voltarTelaConsulta());
 
         return view;
     }
@@ -84,7 +86,7 @@ public class FragmentListarConsultas extends Fragment {
 
             tvResultado.setText(buffer.toString());
         } catch (SQLException e) {
-            Toast.makeText(view.getContext(), "Erro ao listar consultas: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), "Erro ao listar consultas: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -113,6 +115,17 @@ public class FragmentListarConsultas extends Fragment {
         } else {
             Toast.makeText(getContext(), "Consulta não encontrada", Toast.LENGTH_SHORT).show();
         }
+    }
+	
+	public void voltarTelaConsulta() {
+        // Transição para o FragmentConsultas
+        FragmentConsultas fragmentConsultas = new FragmentConsultas();
+
+        // Cria uma transação para substituir o fragmento atual
+        getFragmentManager().beginTransaction()
+        .replace(R.id.fragment, fragmentConsultas)
+        .addToBackStack(null)
+        .commit();
     }
 
     private void abrirDetalhesConsulta(String consultaId, String tipoConsulta) {

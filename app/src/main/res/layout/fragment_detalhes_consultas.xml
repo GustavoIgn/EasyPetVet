@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fundo"
-    android:orientation="vertical"
     tools:context=".FragmentDetalhesConsulta">
 
     <!-- Título do Fragment -->
@@ -18,18 +17,20 @@
         android:text="@string/tela_consulta"
         android:textColor="#ffffff"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Spinner de Animais -->
     <Spinner
         android:id="@+id/spAnimais"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTituloConsultas"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Campo Data -->
@@ -38,151 +39,162 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#4B4B4B"
+		android:inputType="number"
         android:hint="@string/data"
         android:padding="12dp"
         android:textColorHint="#ffffff"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spAnimais"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spAnimais" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Campo Descricao -->
+    <!-- Campo Descrição -->
     <EditText
         android:id="@+id/editTextDescricao"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="13dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#4B4B4B"
         android:hint="@string/descricao"
         android:padding="12dp"
         android:textColorHint="#ffffff"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextData"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextData" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Campo Prioridade (para Consulta Emergência) -->
+    <!-- Campo Prioridade -->
     <EditText
         android:id="@+id/editTextPrioridade"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#4B4B4B"
         android:hint="@string/prioridade"
         android:padding="12dp"
         android:textColorHint="#ffffff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTextDescricao"
-        android:visibility="gone" /> <!-- Inicialmente invisível -->
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
 
-    <!-- Campo Tempo Estimado Atendimento (para Consulta Emergência) -->
+    <!-- Campo Tempo Estimado Atendimento -->
     <EditText
         android:id="@+id/editTextTempoEstimadoAtendimento"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#4B4B4B"
         android:hint="@string/tempo_estimado_atendimento"
-		android:inputType="number"
+        android:inputType="number"
         android:padding="12dp"
         android:textColorHint="#ffffff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTextPrioridade"
-        android:visibility="gone" /> <!-- Inicialmente invisível -->
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
 
-    <!-- Campo Recorrência (para Consulta Rotina) -->
+    <!-- Campo Recorrência -->
     <EditText
         android:id="@+id/editTextRecorrencia"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#4B4B4B"
         android:hint="@string/recorrencia"
         android:padding="12dp"
         android:textColorHint="#ffffff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTextTempoEstimadoAtendimento"
-        android:visibility="gone" /> <!-- Inicialmente invisível -->
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
 
-    <!-- Campo Próxima Consulta (para Consulta Rotina) -->
+    <!-- Campo Próxima Consulta -->
     <EditText
         android:id="@+id/editTextProximaConsulta"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#4B4B4B"
         android:hint="@string/proxima_consulta"
+		android:inputType="number"
         android:padding="12dp"
         android:textColorHint="#ffffff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTextRecorrencia"
-        android:visibility="gone" /> <!-- Inicialmente invisível -->
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
 
-    <!-- Botões CRUD -->
+    <!-- Botões CRUD (Ordem alterada) -->
     <Button
         android:id="@+id/buttonEditar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#4ebf5d"
         android:padding="12dp"
         android:text="@string/editar"
         android:textColor="#ffffff"
         app:layout_constraintTop_toBottomOf="@id/editTextProximaConsulta"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/buttonListar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="#5BC0DE"
-        android:padding="12dp"
-        android:text="@string/listar"
-        android:textColor="#ffffff"
-        app:layout_constraintTop_toBottomOf="@id/buttonEditar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/buttonNovaConsulta"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="#FFAA00"
-        android:padding="12dp"
-        android:text="@string/novaConsulta"
-        android:textColor="#ffffff"
-        app:layout_constraintTop_toBottomOf="@id/buttonListar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/buttonApagar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="#ff4c4c"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#FF6B6B"
         android:padding="12dp"
         android:text="@string/apagar"
         android:textColor="#ffffff"
+        app:layout_constraintTop_toBottomOf="@id/buttonEditar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/buttonNovaConsulta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#FFAA00"
+        android:padding="12dp"
+        android:text="@string/novaConsulta"
+        android:textColor="#ffffff"
+        app:layout_constraintTop_toBottomOf="@id/buttonApagar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/buttonListar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#5BC0DE"
+        android:padding="12dp"
+        android:text="@string/listar"
+        android:textColor="#ffffff"
         app:layout_constraintTop_toBottomOf="@id/buttonNovaConsulta"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

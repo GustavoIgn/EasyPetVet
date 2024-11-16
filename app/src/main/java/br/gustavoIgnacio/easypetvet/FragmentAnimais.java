@@ -92,9 +92,9 @@ public class FragmentAnimais extends Fragment {
 
         try {
             animalController.insert(animal);
-            Toast.makeText(view.getContext(), "Animal Inserido com Sucesso", Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), "Animal Inserido com Sucesso", Toast.LENGTH_SHORT).show();
         } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
         limparCampos();
@@ -105,7 +105,7 @@ public class FragmentAnimais extends Fragment {
         String id = editTextId.getText().toString().trim();
 
         if (id.isEmpty()) {
-            Toast.makeText(view.getContext(), "Digite o ID conforme Tabela", Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), "Digite o ID conforme Tabela", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -114,11 +114,11 @@ public class FragmentAnimais extends Fragment {
             if (animal != null) {
                 preencheCampos(animal);
             } else {
-                Toast.makeText(view.getContext(), "Animal não Encontrado", Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(), "Animal não Encontrado", Toast.LENGTH_SHORT).show();
                 limparCampos();
             }
         } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -134,7 +134,7 @@ public class FragmentAnimais extends Fragment {
 
             tvResultado.setText(buffer.toString());
         } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -145,10 +145,10 @@ public class FragmentAnimais extends Fragment {
         Animal animal = montaAnimal();
         try {
             animalController.delete(animal);
-            Toast.makeText(view.getContext(), "Animal Apagado com Sucesso", Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), "Animal Apagado com Sucesso", Toast.LENGTH_SHORT).show();
             listarAnimais();
         } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
         limparCampos();
@@ -162,10 +162,10 @@ public class FragmentAnimais extends Fragment {
 
         try {
             animalController.update(animal);
-            Toast.makeText(view.getContext(), "Animal Atualizado com Sucesso", Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), "Animal Atualizado com Sucesso", Toast.LENGTH_SHORT).show();
             listarAnimais();
         } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
         limparCampos();
@@ -223,13 +223,13 @@ public class FragmentAnimais extends Fragment {
 
         // Verifica se algum campo está vazio ou idade igual a 0
         if (nome.isEmpty() || especie.isEmpty() || raca.isEmpty() || cpfDono.isEmpty() || idadeStr.isEmpty() || id.isEmpty()) {
-            Toast.makeText(view.getContext(), "Preencha todos os campos", Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         int idade = Integer.parseInt(idadeStr);
         if (idade == 0) {
-            Toast.makeText(view.getContext(), "Idade não pode ser zero", Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), "Idade não pode ser zero", Toast.LENGTH_SHORT).show();
             return false;
         }
 

@@ -105,7 +105,7 @@ public class FragmentConsultas extends Fragment {
     // Método para salvar Consulta
     private void salvarConsulta() {
         if (animalSelecionado == null) {
-            Toast.makeText(view.getContext(), "Selecione um animal", Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), "Selecione um animal", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -117,15 +117,15 @@ public class FragmentConsultas extends Fragment {
             if (radioEmergencia.isChecked()) {
                 ConsultaEmergencia consultaEmergencia = montaConsultaEmergencia();
                 consultaEmergenciaController.insert(consultaEmergencia);
-                Toast.makeText(view.getContext(), "Consulta de Emergência Inserida com Sucesso", Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(), "Consulta de Emergência Inserida com Sucesso", Toast.LENGTH_SHORT).show();
             } else if (radioRotina.isChecked()) {
                 ConsultaRotina consultaRotina = montaConsultaRotina();
                 consultaRotinaController.insert(consultaRotina);
-                Toast.makeText(view.getContext(), "Consulta de Rotina Inserida com Sucesso", Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(), "Consulta de Rotina Inserida com Sucesso", Toast.LENGTH_SHORT).show();
             }
             limparCampos();
         } catch (SQLException e) {
-            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -152,7 +152,7 @@ public class FragmentConsultas extends Fragment {
         String descricao = editTextDescricao.getText().toString().trim();
 
         if (data.isEmpty() || descricao.isEmpty()) {
-            Toast.makeText(view.getContext(), "Preencha todos os campos", Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
@@ -212,7 +212,7 @@ public class FragmentConsultas extends Fragment {
                             Toast.makeText(getContext(), "Animal não encontrado", Toast.LENGTH_SHORT).show();
                         }
                     } catch (SQLException e) {
-                        Toast.makeText(getContext(), "Erro ao buscar animal: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Erro ao buscar animal: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -221,7 +221,7 @@ public class FragmentConsultas extends Fragment {
             });
 
         } catch (SQLException e) {
-            Toast.makeText(getContext(), "Erro ao carregar animais: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Erro ao carregar animais: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

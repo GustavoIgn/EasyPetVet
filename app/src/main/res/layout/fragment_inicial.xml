@@ -24,8 +24,8 @@
     <!-- TextView centralizado abaixo da imagem -->
     <TextView
         android:id="@+id/tvInicio"
-        android:layout_width="312dp"
-        android:layout_height="111dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/inicio"
         android:textAlignment="center"
         android:textAllCaps="true"
@@ -41,7 +41,7 @@
         android:id="@+id/tvAutor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-	android:layout_marginTop="130dp"
+	android:layout_marginTop="160dp"
         android:text="© Gustavo Ignacio"
         android:textAlignment="center"
         android:textSize="14sp"

@@ -148,10 +148,10 @@ public class FragmentDetalhesConsulta extends Fragment {
 
         if (consultaAtual instanceof ConsultaEmergencia) {
             consultaEmergenciaController.delete((ConsultaEmergencia)consultaAtual);
-            Toast.makeText(getContext(), "Consulta de Emergência apagada com sucesso", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Consulta de Emergência apagada com sucesso", Toast.LENGTH_SHORT).show();
         } else {
             consultaRotinaController.delete((ConsultaRotina)consultaAtual);
-            Toast.makeText(getContext(), "Consulta de Rotina apagada com sucesso", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Consulta de Rotina apagada com sucesso", Toast.LENGTH_SHORT).show();
         }
         voltarParaLista();
     }
@@ -159,7 +159,7 @@ public class FragmentDetalhesConsulta extends Fragment {
     // Método para editar a consulta
     private void editarConsulta() {
         if (animalSelecionado == null) {
-            Toast.makeText(view.getContext(), "Selecione um animal", Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), "Selecione um animal", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -170,12 +170,12 @@ public class FragmentDetalhesConsulta extends Fragment {
             ConsultaEmergencia cE = montaConsultaEmergencia();
             cE.setId(consultaAtual.getId()); // Mantenha o ID da consulta original
             consultaEmergenciaController.update(cE);
-            Toast.makeText(view.getContext(), "Consulta de Emergência Atualizada com Sucesso", Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), "Consulta de Emergência Atualizada com Sucesso", Toast.LENGTH_SHORT).show();
         } else {
             ConsultaRotina cR = montaConsultaRotina();
             cR.setId(consultaAtual.getId()); // Mantenha o ID da consulta original
             consultaRotinaController.update(cR);
-            Toast.makeText(view.getContext(), "Consulta de Rotina Atualizada com Sucesso", Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), "Consulta de Rotina Atualizada com Sucesso", Toast.LENGTH_SHORT).show();
         }
 		voltarParaLista();
     }
