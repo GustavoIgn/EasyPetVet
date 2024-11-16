@@ -38,7 +38,7 @@ O **EasyPetVet** é uma solução Android para centralizar e organizar o histór
 ---
 
 ## ⚙️ Instalação:
-Baixe o APK mais recente do EasyPetVet: [📥 Baixar APK](https://drive.google.com/file/d/1SFllhZA_bfL9BZJ-5_FE7AqlwiFLdHkg/view?usp=sharing)
+Baixe o APK mais recente do EasyPetVet: <a href="https://drive.google.com/file/d/1SFllhZA_bfL9BZJ-5_FE7AqlwiFLdHkg/view?usp=sharing" target="_blank">📥 Baixar APK</a>
 
 Transfira o arquivo para o seu dispositivo Android.
 No dispositivo, habilite a instalação de apps de fontes desconhecidas (se necessário).
