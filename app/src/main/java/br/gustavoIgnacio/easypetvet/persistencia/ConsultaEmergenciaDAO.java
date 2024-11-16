@@ -84,6 +84,21 @@ public class ConsultaEmergenciaDAO implements ICRUDDao<ConsultaEmergencia> {
 
         return consultas;
     }
+	
+	public List<ConsultaEmergencia> findByAnimalId(int animalId) throws SQLException {
+    List<ConsultaEmergencia> consultas = new ArrayList<>();
+    Cursor cursor = db.query(DatabaseHelper.TABELA_CONSULTA_EMERGENCIA, null, "animal_id = ?", new String[]{String.valueOf(animalId)}, null, null, null);
+
+    if (cursor != null) {
+        while (cursor.moveToNext()) {
+            ConsultaEmergencia consulta = cursorToConsulta(cursor);
+            consultas.add(consulta);
+        }
+        cursor.close();
+    }
+
+    return consultas;
+}
 
     private ConsultaEmergencia cursorToConsulta(Cursor cursor) {
         ConsultaEmergencia consulta = new ConsultaEmergencia();

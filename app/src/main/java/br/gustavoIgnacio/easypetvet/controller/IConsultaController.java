@@ -14,4 +14,5 @@ public interface IConsultaController<T> {
 	public void delete(T t) throws SQLException;
 	public T findById(String string) throws SQLException;
 	public List<T> findALL() throws SQLException;
+	public List<T> findByAnimalId(int valor) throws SQLException;
 }

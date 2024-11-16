@@ -60,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new FragmentConsultas();
             } else if (tipoItem.equals("Voltar")) {
                 fragment = new FragmentInicial();
-            }
+            } else if (tipoItem.equals("Historico")) {
+				fragment = new FragmentHistoricoAnimal();
+			}
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -106,6 +108,15 @@ public class MainActivity extends AppCompatActivity {
             this.finish();
             return true;
         }
+		if (id == R.id.menu_historico) {
+			bundle.putString("tipoItem", "Historico");
+			
+			intent.putExtras(bundle);
+			this.startActivity(intent);
+			this.finish();
+			return true;
+		}
+		
         return super.onOptionsItemSelected(item);
     }
 }

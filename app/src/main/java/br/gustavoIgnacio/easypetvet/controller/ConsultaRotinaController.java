@@ -63,4 +63,13 @@ public class ConsultaRotinaController implements IConsultaController<ConsultaRot
 
         return consultaRotinaDAO.findALL();
     }
+	
+	 @ Override
+	public List<ConsultaRotina> findByAnimalId(int id) throws SQLException {
+		if (consultaRotinaDAO.open() == null) {
+			consultaRotinaDAO.open();
+		}
+		
+		return consultaRotinaDAO.findByAnimalId(id);
+	}
 }

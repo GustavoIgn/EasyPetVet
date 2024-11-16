@@ -63,4 +63,13 @@ public class ConsultaEmergenciaController implements IConsultaController<Consult
 
         return consultaEmergenciaDAO.findALL();
     }
+	
+	 @ Override
+	public List< ConsultaEmergencia > findByAnimalId(int id) throws SQLException {
+		if (consultaEmergenciaDAO.open() == null) {
+			consultaEmergenciaDAO.open();
+		}
+		
+		return consultaEmergenciaDAO.findByAnimalId(id);
+	}
 }

@@ -19,9 +19,11 @@
     <string name="consultas">Consultas</string>
     <string name="adicionar_consulta">Adicionar Consulta</string>
     <string name="voltar">Voltar</string>
+	<string name="historico">Histórico</string>
     <string name="inicio">Bem Vindo ao EasyPetVet!</string>
 	<string name="tela_animal">Informações do Animal</string>
 	<string name="tela_consulta">Informações da Consulta</string>
+	<string name="tela_historico">Consultas do Animal</string>
 	<string name="data">Data (DD/MM/AA)</string>
 	<string name="descricao">Descrição</string>
 	<string name="emergencia">Emergencia</string>
